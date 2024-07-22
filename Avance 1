@@ -1,0 +1,41 @@
+        JLabel headerLabel = new JLabel("Gestión del Dominio del Grupo Fractalia para HelpDesk", JLabel.CENTER);
+        headerLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        panel.add(headerLabel, BorderLayout.NORTH);
+
+        // Description
+        JTextArea descriptionArea = new JTextArea(
+                "Bienvenido a la gestión del dominio del Grupo Fractalia. Desde aquí podrás:\n"
+                + "- Restablecer la contraseña de un usuario y gestionar las licencias asignadas.\n"
+                + "- Obtener Nombre de máquina para el Dominio fractaliagroup y gestionar su asignación."
+        );
+        descriptionArea.setEditable(false);
+        descriptionArea.setBackground(null);
+        descriptionArea.setBorder(null);
+        panel.add(descriptionArea, BorderLayout.CENTER);
+
+        // Form
+        JPanel formPanel = new JPanel();
+        formPanel.setLayout(new GridLayout(4, 2, 10, 10));
+        formPanel.setBorder(BorderFactory.createTitledBorder("Seleccionar datos de la nueva Máquina"));
+
+        formPanel.add(new JLabel("País:"));
+        JComboBox<String> countryComboBox = new JComboBox<>(new String[]{"Seleccionar...", "País 1", "País 2"});
+        formPanel.add(countryComboBox);
+
+        formPanel.add(new JLabel("Departamento:"));
+        JComboBox<String> departmentComboBox = new JComboBox<>(new String[]{"Seleccionar...", "Departamento 1", "Departamento 2"});
+        formPanel.add(departmentComboBox);
+
+        formPanel.add(new JLabel("Tipo de ordenador:"));
+        JComboBox<String> typeComboBox = new JComboBox<>(new String[]{"Seleccionar...", "Tipo 1", "Tipo 2"});
+        formPanel.add(typeComboBox);
+
+        JButton generateButton = new JButton("Generar código de Máquina");
+        formPanel.add(generateButton);
+
+        panel.add(formPanel, BorderLayout.SOUTH);
+
+        frame.add(panel);
+        frame.setVisible(true);
+    }
+}
