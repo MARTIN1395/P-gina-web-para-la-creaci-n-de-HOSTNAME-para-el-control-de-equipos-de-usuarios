@@ -1,0 +1,96 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class HelpDeskForm {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Gestión del Dominio del Grupo Fractalia para HelpDesk");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800, 600);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+
+        // Header
+        JLabel headerLabel = new JLabel("Gestión del Dominio del Grupo Fractalia para HelpDesk", JLabel.CENTER);
+        headerLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        panel.add(headerLabel, BorderLayout.NORTH);
+
+        // Description
+        JTextArea descriptionArea = new JTextArea(
+                "Bienvenido a la gestión del dominio del Grupo Fractalia. Desde aquí podrás:\n"
+                + "- Restablecer la contraseña de un usuario y gestionar las licencias asignadas.\n"
+                + "- Obtener Nombre de máquina para el Dominio fractaliagroup y gestionar su asignación."
+        );
+        descriptionArea.setEditable(false);
+        descriptionArea.setBackground(null);
+        descriptionArea.setBorder(null);
+        panel.add(descriptionArea, BorderLayout.CENTER);
+
+        // Tabs
+        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.addTab("Gestión de usuarios", null);
+        tabbedPane.addTab("Crear máquinas en Dominio", null);
+        tabbedPane.addTab("Gestionar máquinas del Dominio", createMachineManagementPanel());
+
+        panel.add(tabbedPane, BorderLayout.SOUTH);
+
+        frame.add(panel);
+        frame.setVisible(true);
+    }
+
+    private static JPanel createMachineManagementPanel() {
+        JPanel machineManagementPanel = new JPanel();
+        machineManagementPanel.setLayout(new BorderLayout());
+
+        // Filters
+        JPanel filterPanel = new JPanel();
+        filterPanel.setLayout(new GridLayout(2, 7, 10, 10));
+        filterPanel.setBorder(BorderFactory.createTitledBorder("Seleccionar datos de la nueva Máquina"));
+
+        filterPanel.add(new JLabel("Nombre de máquina"));
+        JTextField machineNameField = new JTextField();
+        filterPanel.add(machineNameField);
+
+        filterPanel.add(new JLabel("País"));
+        JTextField countryField = new JTextField();
+        filterPanel.add(countryField);
+
+        filterPanel.add(new JLabel("Departamento"));
+        JTextField departmentField = new JTextField();
+        filterPanel.add(departmentField);
+
+        filterPanel.add(new JLabel("Tipo de ordenador"));
+        JTextField typeField = new JTextField();
+        filterPanel.add(typeField);        
+
+        filterPanel.add(new JLabel("Usuario asociado"));
+        JTextField userField = new JTextField();
+        filterPanel.add(userField);
+
+        filterPanel.add(new JLabel("N.Serie"));
+        JTextField serialNumberField = new JTextField();
+        filterPanel.add(serialNumberField);
+
+        filterPanel.add(new JLabel("Buscar"));
+        JTextField searchField = new JTextField();
+        filterPanel.add(searchField);
+
+        JButton clearButton = new JButton("Limpiar filtro");
+        filterPanel.add(clearButton);
+        
+        JButton filterButton = new JButton("Filtrar");
+        filterPanel.add(filterButton);
+
+        machineManagementPanel.add(filterPanel, BorderLayout.NORTH);
+
+        // Results table
+        String[] columnNames = {"Nombre máquina", "País", "Departamento", "Tipo", "Num. de Serie", "Empleado", "Usuario"};
+        Object[][] data = {};
+        JTable resultsTable = new JTable(data, columnNames);  
+        JScrollPane scrollPane = new JScrollPane(resultsTable);
+
+        machineManagementPanel.add(scrollPane, BorderLayout.CENTER);
+
+        return machineManagementPanel;
+    }
+}
